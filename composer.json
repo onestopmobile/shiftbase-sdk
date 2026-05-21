@@ -1,0 +1,89 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "onestopmobile/shiftbase-sdk",
+    "description": "PHP SDK for the Shiftbase API, maintained by One Stop Mobile.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "shiftbase",
+        "sdk",
+        "api",
+        "onestopmobile",
+        "saloon"
+    ],
+    "authors": [
+        {
+            "name": "One Stop Mobile"
+        }
+    ],
+    "require": {
+        "php": "^8.5.0",
+        "saloonphp/saloon": "^4.0"
+    },
+    "conflict": {
+        "guzzlehttp/guzzle": "<7.10.2",
+        "guzzlehttp/promises": "<2.3.0",
+        "psr/http-factory": "<1.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OneStopMobile\\ShiftbaseSdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "format": "vendor/bin/pint --parallel",
+        "analyse": "vendor/bin/phpstan analyse",
+        "rector": "vendor/bin/rector process",
+        "lint": [
+            "@rector",
+            "@format"
+        ],
+        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/pest --parallel --coverage --coverage-clover coverage.xml --exactly=100.0 --colors=never",
+        "test:type-coverage": "vendor/bin/pest --type-coverage --min=100",
+        "test:unit": "vendor/bin/pest --parallel",
+        "test:lint": [
+            "vendor/bin/pint --parallel --test",
+            "vendor/bin/rector process --dry-run"
+        ],
+        "test:types": "vendor/bin/phpstan analyse",
+        "test": [
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:lint",
+            "@test:types"
+        ],
+        "check": [
+            "@test:lint",
+            "@test:types"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "laravel/pint": "^1.29.0",
+        "pestphp/pest": "^5.0",
+        "pestphp/pest-plugin-type-coverage": "^5.0",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.4.2",
+        "roave/security-advisories": "dev-latest"
+    }
+}
